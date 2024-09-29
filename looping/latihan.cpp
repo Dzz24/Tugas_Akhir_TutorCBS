@@ -3,6 +3,9 @@ using namespace std;
 int main (){
     int x;  
     string musik[10]= {};
+    void tambahMusik(){
+        cout << "Musik telah ditambahkan";
+    }
     do {
         cout << "===== Welcome to Program Musik =====" << endl;
         cout << "1. Tambah Musik" << endl;
@@ -12,6 +15,7 @@ int main (){
         cin >> x;
         switch (x){
             case 1:
+            tambahMusik();
             break;
             case 2:
             case 3:
