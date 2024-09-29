@@ -1,76 +1,79 @@
 #include <iostream>
+#include <vector>
+#include <string>
+
 using namespace std;
 
-void daftarLagu(string lagu[], int banyakLagu) { //fungsi case 2
-    cout << "Berikut daftar lagu yang ada :" << endl;
-    for (int i = 0; i < banyakLagu; i++) {
-        cout << i + 1 << ". " << lagu[i] << endl;
+void tambahMusik(vector<string> &daftarMusik) {
+    string judul;
+    cout << "Masukkan judul lagu: ";
+    cin.ignore();
+    getline(cin, judul);
+    daftarMusik.push_back(judul);
+    cout << "Lagu '" << judul << "' berhasil ditambahkan." << endl;
+}
+
+void hapusMusik(vector<string> &daftarMusik) {
+    if (daftarMusik.empty()) {
+        cout << "Daftar musik kosong, tidak ada yang bisa dihapus." << endl;
+        return;
+}
+    int index;
+    cout << "Masukkan nomor lagu yang ingin dihapus: ";
+    cin >> index;
+
+    if (index > 0 && index <= daftarMusik.size()) {
+        cout << "Lagu '" << daftarMusik[index - 1] << "' dihapus." << endl;
+        daftarMusik.erase(daftarMusik.begin() + (index - 1));
+    } 
+    else {
+        cout << "Nomor tidak valid." << endl;
     }
 }
 
-int main (){
-    int x;  
-    string musik[10]= {};
-    void tambahMusik(){
-        cout << "Musik telah ditambahkan";
-    }
+void lihatDaftarMusik(const vector<string> &daftarMusik) {
+    if (daftarMusik.empty()) {
+        cout << "Daftar musik kosong." << endl;
+} 
+    else {
+        cout << "Daftar musik:" << endl;
+        for (int i = 0; i < daftarMusik.size(); i++) {
+        cout << i + 1 << ". " << daftarMusik[i] << endl;
+}
+}
+}
+
+int main() {
+    vector<string> daftarMusik;
+    int pilihan;
+
     do {
-        cout << "===== Welcome to Program Musik =====" << endl;
-        cout << "1. Tambah Musik" << endl;
-        cout << "2. Hapus Musik" << endl;
-        cout << "3. List Musik" << endl;
-        cout << "4. Stop" << endl;
-        cin >> x;
-        switch(x){
+        cout << "  << endlMenu: " << endl;
+        cout << "1. Tambah musik" << endl;
+        cout << "2. Hapus musik" << endl;
+        cout << "3. Lihat daftar musik" << endl;
+        cout << "4. Keluar" << endl;
+        cout << "Pilih menu: ";
+        cin >> pilihan;
+
+        switch (pilihan) {
             case 1:
-            tambahMusik();
-            break;
+                tambahMusik(daftarMusik);
+                break;
             case 2:
-                int banyakLagu;
-                do{
-                    cout << "Masukkan jumlah lagu yang diinginkan (maksimal 10): ";
-                    cin >> banyakLagu;
-                    if(banyakLagu>10){
-                        cout<<"Banyak lagu yang anda input tidak valid. Silahkan input ulang\n";
-                    }
-
-                }while(banyakLagu>10);
-                cin.ignore();
-                string lagu[10];
-                for (int i=0; i<banyakLagu; i++){
-                    cout << "Masukkan judul lagu ke-" <<i+1<<" : ";
-                    getline(cin, lagu[i]);
-                    }
-                daftarLagu(lagu, banyakLagu);
-    
-                int nomorHapus;
-                cout<<"Masukkan nomor lagu yang ingin dihapus (jika tidak ingin menghapus, input 0) : ";
-                cin>>nomorHapus;
-                if(nomorHapus==0){
-                    cout<<"Tidak ada lagu yang dihapus."<<endl;
-                }
-                else if(nomorHapus<=banyakLagu){
-                for (int i=nomorHapus-1; i<banyakLagu - 1; i++) {
-                    lagu[i] = lagu[i + 1];
-                }
-
-                banyakLagu--;
-                cout << "Lagu berhasil dihapus." << endl;
-                daftarLagu(lagu, banyakLagu);
-                }
-                else {
-                    cout<<"Input salah.";
-                }
-            break;
+                hapusMusik(daftarMusik);
+                break;
             case 3:
-            break;
+                lihatDaftarMusik(daftarMusik);
+                break;
             case 4:
-                cout << "Sistem telah berhenti";
-            break;
-            default :
-                cout << "Input harus 1-4"<< endl;
-            break; 
+                cout << "Keluar dari program." << endl;
+                break;
+            default:
+                cout << "Pilihan tidak valid, coba lagi." << endl;
+                break;
         }
-    }
-    while(x != 4);
+    } while (pilihan != 4);
+
+    return 0;
 }
