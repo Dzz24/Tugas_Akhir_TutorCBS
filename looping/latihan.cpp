@@ -16,6 +16,7 @@ void tambahMusik(vector<string> &daftarMusik) {
 void hapusMusik(vector<string> &daftarMusik) {
     if (daftarMusik.empty()) {
         cout << "Daftar musik kosong, tidak ada yang bisa dihapus." << endl;
+        cout << "Dzikri" << endl;
         return;
 }
     int index;
